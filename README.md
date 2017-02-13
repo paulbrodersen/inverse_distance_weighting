@@ -13,7 +13,7 @@ while imposing smoothness in data sparse regions.
 ``` python
 import numpy as np
 import matplotlib.pyplot as plt
-from idw_interpolation import idw_tree
+import idw
 
 # create sample points with structured scores
 X1 = 10 * np.random.rand(1000, 2) -5
@@ -24,14 +24,14 @@ def func(x, y):
 z1 = func(X1[:,0], X1[:,1])
 
 # 'train'
-tree = idw_tree(X1, z1)
+idw_tree = idw.tree(X1, z1)
 
 # 'test'
 spacing = np.linspace(-5., 5., 100)
 X2 = np.meshgrid(spacing, spacing)
 grid_shape = X2[0].shape
 X2 = np.reshape(X2, (2, -1)).T
-z2 = tree(X2)
+z2 = idw_tree(X2)
 
 # plot
 fig, (ax1, ax2, ax3) = plt.subplots(1,3, sharex=True, sharey=True, figsize=(10,3))

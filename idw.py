@@ -1,4 +1,5 @@
-# idw_interpolation.py ---
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # Copyright (C) 2016 Paul Brodersen <paulbrodersen+idw@gmail.com>
 
@@ -27,15 +28,18 @@ weighted by the inverse of their distances.
 Example:
 --------
 
+# import idw
+
 # 'train'
-tree = idw_tree(X1, z1)
+idw_tree = idw.tree(X1, z1)
 
 # 'test'
 spacing = np.linspace(-5., 5., 100)
 X2 = np.meshgrid(spacing, spacing)
 grid_shape = X2[0].shape
 X2 = np.reshape(X2, (2, -1)).T
-z2 = tree(X2)
+z2 = idw_tree(X2)
+
 
 For a more complete example see demo().
 
@@ -44,7 +48,7 @@ For a more complete example see demo().
 import numpy as np
 from scipy.spatial import cKDTree
 
-class idw_tree(object):
+class tree(object):
     """
     Compute the score of query points based on the scores of their k-nearest neighbours,
     weighted by the inverse of their distances.
@@ -64,19 +68,19 @@ class idw_tree(object):
 
     Returns:
     --------
-        idw_tree instance: object
+        tree instance: object
 
     Example:
     --------
 
     # 'train'
-    tree = idw_tree(X1, z1)
+    idw_tree = tree(X1, z1)
 
     # 'test'
     spacing = np.linspace(-5., 5., 100)
     X2 = np.meshgrid(spacing, spacing)
     X2 = np.reshape(X2, (2, -1)).T
-    z2 = tree(X2)
+    z2 = idw_tree(X2)
 
     See also:
     ---------
@@ -205,14 +209,14 @@ def demo():
     z1 = func(X1[:,0], X1[:,1])
 
     # 'train'
-    tree = idw_tree(X1, z1)
+    idw_tree = tree(X1, z1)
 
     # 'test'
     spacing = np.linspace(-5., 5., 100)
     X2 = np.meshgrid(spacing, spacing)
     grid_shape = X2[0].shape
     X2 = np.reshape(X2, (2, -1)).T
-    z2 = tree(X2)
+    z2 = idw_tree(X2)
 
     # plot
     fig, (ax1, ax2, ax3) = plt.subplots(1,3, sharex=True, sharey=True, figsize=(10,3))
