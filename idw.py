@@ -91,7 +91,7 @@ class tree(object):
         if not X is None:
             self.tree = cKDTree(X, leafsize=leafsize )
         if not z is None:
-            self.z = z
+            self.z = np.array(z)
 
     def fit(self, X=None, z=None, leafsize=10):
         """
